@@ -13,4 +13,17 @@ imagen:
 imagen_save:
     path: /imagen/save
     controller: App\Controller\ImagenController::save
+
+imagen_detail:
+    path: /imagen/{id}
+    controller: App\Controller\ImagenController::imagen
+
+imagen_update:
+    path: /imagen/update/{id}
+    controller: App\Controller\ImagenController::update
+
+imagen_delete:
+    path: /imagen/delete/{id}
+    controller: App\Controller\ImagenController::delete
+
     
