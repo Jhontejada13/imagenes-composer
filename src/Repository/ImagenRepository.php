@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Imagenes;
+use App\Entity\Imagen;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Imagenes|null find($id, $lockMode = null, $lockVersion = null)
- * @method Imagenes|null findOneBy(array $criteria, array $orderBy = null)
- * @method Imagenes[]    findAll()
- * @method Imagenes[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Imagen|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Imagen|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Imagen[]    findAll()
+ * @method Imagen[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ImagenesRepository extends ServiceEntityRepository
+class ImagenRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Imagenes::class);
+        parent::__construct($registry, Imagen::class);
     }
 
     // /**
-    //  * @return Imagenes[] Returns an array of Imagenes objects
+    //  * @return Imagen[] Returns an array of Imagen objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ImagenesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Imagenes
+    public function findOneBySomeField($value): ?Imagen
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.exampleField = :val')
