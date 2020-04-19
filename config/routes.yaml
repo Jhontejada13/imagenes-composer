@@ -6,7 +6,11 @@ inicio:
     path: /inicio
     controller: App\Controller\HomeController::index
     
-imagenes:
-    path: /imagenes
-    controller: App\Controller\HomeController::imagenes  
+imagen:
+    path: /imagen
+    controller: App\Controller\ImagenController::index
+    
+imagen_save:
+    path: /imagen/save
+    controller: App\Controller\ImagenController::save
     
