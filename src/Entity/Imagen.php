@@ -5,11 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ImagenesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ImagenRepository")
  */
 class Imagen
 {
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -23,7 +22,7 @@ class Imagen
     private $nombre;
 
     /**
-     * @ORM\Column(name="descripcion", type="string", length=40, nullable=true)
+     * @ORM\Column(name="descripcion", type="string", length=300, nullable=false)
      */
     private $descripcion;
 
@@ -49,12 +48,10 @@ class Imagen
         return $this->descripcion;
     }
 
-    public function setDescripcion(?string $descripcion): self
+    public function setDescripcion(string $descripcion): self
     {
         $this->descripcion = $descripcion;
 
         return $this;
     }
-
-
 }
