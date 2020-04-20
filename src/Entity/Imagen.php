@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImagenRepository")
@@ -18,11 +20,15 @@ class Imagen
 
     /**
      * @ORM\Column(name="nombre", type="string", length=40, nullable=false)
+     * @NotBlank
+     * @Regex("/[a-zA-Z]/")
      */
     private $nombre;
 
     /**
      * @ORM\Column(name="descripcion", type="string", length=300, nullable=false)
+     * @NotBlank
+     * @Regex("/[a-zA-Z]/")
      */
     private $descripcion;
 
