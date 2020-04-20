@@ -13,6 +13,7 @@ imagen:
 imagen_save:
     path: /imagen/save
     controller: App\Controller\ImagenController::save
+    methods: [POST]
 
 imagen_detail:
     path: /imagen/{id}
@@ -25,5 +26,9 @@ imagen_update:
 imagen_delete:
     path: /imagen/delete/{id}
     controller: App\Controller\ImagenController::delete
+
+crear_imagen:
+    path: /crear-imagen
+    controller: App\Controller\ImagenController::createImagen
 
     
