@@ -5,18 +5,49 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 use App\Entity\Imagen;
+use App\Form\ImagenType;
 
 class ImagenController extends AbstractController
 {
     /**
      * @Route("/imagen", name="imagen")
      */
+
+
+    public function createImagen(Request $request){
+        $imagen = new Imagen();
+        $form = $this->createForm(ImagenType::class, $imagen);  
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($imagen);
+            $entityManager->flush(); 
+
+            //Session flag
+            $session = new Session();
+            $session->getFlashBag()->add('mensaje', 'Imagen creada');
+
+            return $this->redirectToRoute('crear_imagen');
+
+        }
+
+        return $this->render('imagen/crearImagen.html.twig', [
+            'form' => $form->createView()
+        ]);
+
+    }
+
     public function index()
     {
         $imagen_repo = $this->getDoctrine()->getRepository(Imagen::class);
 
-        $imagenes = $imagen_repo->findAll();
+        //$imagenes = $imagen_repo->findAll();
 
         // Me saca un valor de la base de datos según la condición, aunque existan varios sólo trae uno
         // $imagen = $imagen_repo->findOneBy([
@@ -31,29 +62,44 @@ class ImagenController extends AbstractController
         //     'id' => 'DESC' //Ordena la entrega de los registros en pantalla de manera descendente
         // ]);
         
+        //SQL -> sentencia para traer los datos de la bd en la tabla imagen
+        // $connection = $this->getDoctrine()->getConnection();
+        // $sql = 'SELECT *FROM imagen ORDER BY id ASC';
+        // $prepare = $connection->prepare($sql);
+        // $prepare->execute();
+        // $resultset = $prepare->fetchAll();
 
+        //Repository
+        // $imagenes = $imagen_repo->getImageByName('DESC');
+        // var_dump($imagenes);
+        
         return $this->render('imagen/index.html.twig', [
             'controller_name' => 'ImagenController',
-            'imagenes' => $imagenes
+            // 'imagenes' => $imagenes
         ]);
     }
 
     public function save(){
-        //Guardar en tabla de base de datos
-        $entityManager = $this->getDoctrine()->getManager();
 
-        //Creo objeto y le doy valores
-        $imagen = new Imagen();
-        $imagen->setNombre('imagen5');
-        $imagen->setDescripcion('imagen de prueba, a ver qué pasa');
+        //Obtener datos del formulario
 
-        //Persiste el objeto en doctrine
-        $entityManager->persist($imagen);
 
-        //Mandar a tabla de bd
-        $entityManager->flush();
 
-        return new Response('Se guardo la imagen con el id '.$imagen->getId());
+        // //Guardar en tabla de base de datos
+        // $entityManager = $this->getDoctrine()->getManager();
+
+        // //Creo objeto y le doy valores
+        // $imagen = new Imagen();
+        // $imagen->setNombre('imagen5');
+        // $imagen->setDescripcion('imagen de prueba, a ver qué pasa');
+
+        // //Persiste el objeto en doctrine
+        // $entityManager->persist($imagen);
+
+        // //Mandar a tabla de bd
+        // $entityManager->flush();
+
+        // return new Response('Se guardo la imagen con el id '.$imagen->getId());
     }
 
     public function imagen(Imagen $imagen){
